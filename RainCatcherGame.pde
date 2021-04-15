@@ -34,17 +34,18 @@
  }
  
  void draw() {
-   if (gameOn) {
+   
      if (catcher.goldintersect(goldenBall) || score == 150) {  // winner screen pops up if catcher gets the golden ball
        goldenBall.caught();
        Winner(); 
        gameOn = false;
      }
-   /*if (catcher.hunterintersect(hunter))  { // loser screen pops up if hunter catches the catcher
+   if (catcher.hunterintersect(hunter) && millis()/1000 > 5)  { // loser screen pops up if hunter catches the catcher
        score = 0;
        Loser(); 
        gameOn = false;
-     }*/
+     }
+     if (gameOn) {
    background(255);
    fill(0);
    textSize(20);
@@ -94,17 +95,17 @@
      }
    }
    }
-   else {
-     if (keyPressed)
+  
+     if (key==' ')
        restartGame();
-     }
+     
  }
  
  // Restart Method
  void gameOn() {
    if (catcher.goldintersect(goldenBall)) 
      gameOn = false;
-   if (catcher.hunterintersect(hunter))
+   else if (catcher.hunterintersect(hunter))
      gameOn = false;
    gameOn = true;
  }
@@ -409,4 +410,5 @@ void restartGame() {
   droptimer.start();
   level = 1;
   score = 0;
+  gameOn=true;
 }
